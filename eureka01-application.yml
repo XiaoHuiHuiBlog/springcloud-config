@@ -1,15 +1,24 @@
 server:
-  port: 8080
+  port: 3000
+
+eureka:
+  server:
+    #关闭自我保护机制
+    enable-self-preservation: false
+    #设置清理间隔（单位：毫秒 默认是60*1000）
+    eviction-interval-timer-in-ms: 4000
+  instance:
+    hostname: eureka
+
+  client:
+    #把自己作为一个客户端注册到自己身上
+    registerWithEureka: true
+    #要从服务端获取注册信息
+    fetchRegistry: true
+    serviceUrl:
+      #微服务要注册到的地址
+      defaultZone: http://eureka1:3001/eureka,http://eureka2:3002/eureka
+
 spring:
   application:
-    name: ConfigServer
-  cloud:
-    config:
-      server:
-        git:
-          # 仓库地址
-          uri: https://github.com/XiaoHuiHuiT/springcloud-config.git
-          # 查询 GitHub 仓库根目录，子目录，以及所有以 goods、foo、Config 开头的目录
-          search-paths: foo, goods, Config
-          # 启动时，就 clone 仓库到本地，默认是在配置首次请求时，clone 到本地
-          clone-on-start: true
+    name: eurekaServer
