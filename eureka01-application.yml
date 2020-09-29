@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: ConfigServer
+  cloud:
+    config:
+      server:
+        git:
+          # 仓库地址
+          uri: https://github.com/XiaoHuiHuiT/springcloud-config.git
+          # 查询 GitHub 仓库根目录，子目录，以及所有以 goods、foo、Config 开头的目录
+          search-paths: foo, goods, Config
+          # 启动时，就 clone 仓库到本地，默认是在配置首次请求时，clone 到本地
+          clone-on-start: true
